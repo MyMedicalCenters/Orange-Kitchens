@@ -1,0 +1,431 @@
+<html><head>
+    <title>Orange Kitchens - Project Gallery</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #000000, #ff6f00);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(to bottom, #333333, #000000);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background 0.3s ease;
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+        .contact-info {
+            display: flex;
+            align-items: center;
+        }
+        .contact-info a {
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+        }
+        .contact-info i {
+            margin-right: 5px;
+            font-size: 1.2rem;
+        }
+        nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav ul li {
+            margin: 0 1rem;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 400;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #ffab40;
+        }
+        main {
+            padding-top: 140px; /* Adjust for fixed header */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .gallery-item {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal.show {
+            display: block;
+        }
+        .modal.show .modal-image {
+            transform: scale(1);
+        }
+        .close {
+            color: #fff;
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: #fff;
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+        .arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .arrow-left {
+            left: 20px;
+        }
+        .arrow-right {
+            right: 20px;
+        }
+    </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-top">
+                <div class="logo-container">
+                    <img class="logo" src="https://i.postimg.cc/NMX1RxHw/image-4.png" alt="Orange Kitchens logo with four orange squares" width="50" height="50">
+                    <div class="logo-text">Orange Kitchens</div>
+                </div>
+                <div class="contact-info">
+                    <a href="tel:613-252-2412"><i class="fas fa-phone"></i> 613-252-2412</a>
+                    <a href="mailto:info@orangekitchens.ca"><i class="fas fa-envelope"></i> info@orangekitchens.ca</a>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about us.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="project gallery.html">Project Gallery</a></li>
+                    <li><a href="quick quote.html">Quick Quote</a></li>
+                    <li><a href="book appointment.html">Book Appointment</a></li>
+                </ul>
+            </nav>
+        </header>
+    
+        <main>
+            <h1>Project Gallery</h1>
+            <div class="gallery" id="imageGallery">
+                <!-- Sample images -->
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/bJjFhBW/IMG-20240502-WA0009.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/LZpJjSY/IMG-20240502-WA0011.jpg" alt="Rustic kitchen with wooden beams" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/GtXmp5M/IMG-20240502-WA0015.jpg" alt="Minimalist kitchen with island" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/kS5K4V8/IMG-20240502-WA0040.jpg" alt="Luxury kitchen with marble countertops" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/y0w3d9g/IMG-20240502-WA0045.jpg" alt="Contemporary kitchen with stainless steel appliances" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/PC6rDM8/IMG-20240502-WA0048.jpg" alt="Traditional kitchen with custom cabinetry" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/r4rjYjC/IMG-20240502-WA0052.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/b7HTDwj/IMG-20240502-WA0053.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/PmBXXYN/IMG-20240502-WA0054.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/869F548/IMG-20240502-WA0055.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/2jC0xRc/IMG-20240502-WA0058.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/Q6KJ0jP/IMG-20240502-WA0063.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/7CqMQNc/IMG-20240502-WA0066.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/HT0KDfn/IMG-20240502-WA0072.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/CVzyqqy/IMG-20240502-WA0073.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/Jr96Skv/IMG-20240804-WA0001.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/svcjw1r/IMG-20240804-WA0002.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/ZG9kyts/IMG-20240804-WA0003.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/mhfvVN1/IMG-20240804-WA0004.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/MBj4TVZ/IMG-20240804-WA0005.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/ZBVBKtB/IMG-20240804-WA0006.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/T2wRjNp/IMG-20240804-WA0007.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/ZJxZ1wd/IMG-20240804-WA0008.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/GFf5BdS/IMG-20240804-WA0009.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/XXdRT7T/IMG-20240804-WA0010.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/wwW1R61/IMG-20240804-WA0011.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/wMfFJ0P/IMG-20240804-WA0012.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/n7BcQgT/IMG-20240804-WA0013.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/N2gKmZN/IMG-20240804-WA0014.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/B2BLGMv/IMG-20240804-WA0015.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/QdwrX0G/IMG-20240804-WA0016.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/L1PYWj3/IMG-20240804-WA0017.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/KNk3X5g/IMG-20240804-WA0018.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/NSKT3kj/IMG-20240804-WA0019.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.ibb.co/xGfcjsv/IMG-20240804-WA0020.jpg" alt="Modern kitchen with white cabinets" width="300" height="300">
+                </div>
+            </div>
+        </main>
+    
+        <footer>
+            <p>&copy; 2024 Orange Kitchens. All rights reserved.</p>
+        </footer>
+    
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <div class="modal-content">
+                <img class="modal-image" id="modalImage" src="" alt="">
+            </div>
+            <div class="arrow arrow-left">&lt;</div>
+            <div class="arrow arrow-right">&gt;</div>
+        </div>
+    
+        <script>
+            // Keep header background color on scroll
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.background = 'linear-gradient(to bottom, #333333, #000000)';
+                } else {
+                    header.style.background = 'linear-gradient(to bottom, #333333, #000000)';
+                }
+            });
+    
+            // Image modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.getElementsByClassName('close')[0];
+            const leftArrow = document.querySelector('.arrow-left');
+            const rightArrow = document.querySelector('.arrow-right');
+            let currentIndex = 0;
+            let galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+    
+            function openModal(index) {
+                currentIndex = index;
+                modal.style.display = "block";
+                updateModalImage();
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 50);
+            }
+    
+            function closeModal() {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300);
+            }
+    
+            function changeImage(direction) {
+                currentIndex += direction;
+                if (currentIndex < 0) currentIndex = galleryImages.length - 1;
+                if (currentIndex >= galleryImages.length) currentIndex = 0;
+                updateModalImage();
+            }
+    
+            function updateModalImage() {
+                modalImg.src = galleryImages[currentIndex].src;
+                modalImg.alt = galleryImages[currentIndex].alt;
+            }
+    
+            closeBtn.onclick = closeModal;
+            leftArrow.onclick = () => changeImage(-1);
+            rightArrow.onclick = () => changeImage(1);
+    
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    closeModal();
+                }
+            }
+    
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === "block") {
+                    if (e.key === "ArrowLeft") changeImage(-1);
+                    if (e.key === "ArrowRight") changeImage(1);
+                    if (e.key === "Escape") closeModal();
+                }
+            });
+    
+            // Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+    
+            modal.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, false);
+    
+            modal.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, false);
+    
+            function handleSwipe() {
+                if (touchEndX < touchStartX) changeImage(1);
+                if (touchEndX > touchStartX) changeImage(-1);
+            }
+    
+            // Add click event listeners to gallery images
+            galleryImages.forEach((img, index) => {
+                img.addEventListener('click', () => openModal(index));
+            });
+        </script>
+    </body>
+    </html>
